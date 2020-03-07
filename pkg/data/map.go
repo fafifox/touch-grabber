@@ -14,9 +14,11 @@ type dataMapData struct {
 	Name string
 }
 
-func FetchAllDataMap(dataUrl string, langage string, buildVersion string, path string) {
-	for _, typeName := range typeNames {
-		FetchDataMap(dataUrl, langage, buildVersion, path, typeName)
+func FetchAllDataMap(dataUrl string, buildVersion string, path string) {
+	for _, lang := range langs {
+		for _, typeName := range typeNames {
+			FetchDataMap(dataUrl, lang, buildVersion, path, typeName)
+		}
 	}
 }
 
@@ -41,20 +43,25 @@ func FetchDataMap(dataUrl string, langage string, buildVersion string, path stri
 		Data: body,
 		Name: typeName + ".json",
 	}
-	err = SaveDataMap(&dataMapData, buildVersion, path)
+	err = SaveDataMap(&dataMapData, buildVersion, path, langage)
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println("Saved: ", dataMapData.Name)
 }
 
-func SaveDataMap(data *dataMapData, buildVersion string, path string) error {
-	folder := "/dataMap-v" + buildVersion
-	path = path + folder
+func SaveDataMap(data *dataMapData, buildVersion string, path string, lang string) error {
+	mainFolder := "/dataMap-v" + buildVersion
+	langFolder := "/" + lang
+	path = path + mainFolder
+	pathLang := path + langFolder
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		err = os.Mkdir(path, os.ModePerm)
 	}
-	file, err := os.Create(path + "/" + data.Name)
+	if _, err := os.Stat(pathLang); os.IsNotExist(err) {
+		err = os.Mkdir(pathLang, os.ModePerm)
+	}
+	file, err := os.Create(pathLang + "/" + data.Name)
 	if err != nil {
 		return err
 	}

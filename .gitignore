@@ -1,8 +1,9 @@
 *.exe
 *.exe~
+*.zip
 output/
 builds/
-dataMap-v*/
+dataMap*/
 /.idea
 *.iml
 *.ipr
