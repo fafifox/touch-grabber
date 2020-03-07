@@ -1,0 +1,11 @@
+*.exe
+*.exe~
+output/
+/.idea
+*.iml
+*.ipr
+*.iws
+.idea/
+/build/
+/dist/
+/out/
