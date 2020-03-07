@@ -34,4 +34,5 @@ func main() {
 	}
 	versions.GetVersions(cfg.SavePath)
 	data.FetchAllDataMap(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
+	data.FetchAllDataDictionary(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
 }
