@@ -51,15 +51,15 @@ func FetchDataMap(dataUrl string, langage string, buildVersion string, path stri
 }
 
 func SaveDataMap(data *dataMapData, buildVersion string, path string, lang string) error {
-	mainFolder := "/dataMap-v" + buildVersion
+	mainFolder := "/" + buildVersion + "/data/map"
 	langFolder := "/" + lang
 	path = path + mainFolder
 	pathLang := path + langFolder
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		err = os.Mkdir(path, os.ModePerm)
+		err = os.MkdirAll(path, os.ModePerm)
 	}
 	if _, err := os.Stat(pathLang); os.IsNotExist(err) {
-		err = os.Mkdir(pathLang, os.ModePerm)
+		err = os.MkdirAll(pathLang, os.ModePerm)
 	}
 	file, err := os.Create(pathLang + "/" + data.Name)
 	if err != nil {

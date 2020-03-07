@@ -63,8 +63,13 @@ func GetAssets() *Assets {
 Get Config - Get and Parse then return Config struct
 https://proxyconnection.touch.dofus.com/config.json
 */
-func GetConfig() *Config {
+func GetConfig(buildVersion string, path string) *Config {
 	data := httputils.GetRequestBody(TOUCH_CONFIG_URL)
+	//Save config
+	err := SaveData(buildVersion, path, data, "config")
+	if err != nil {
+		log.Println(err)
+	}
 	config := Config{}
 	jsonErr := json.Unmarshal(data, &config)
 	if jsonErr != nil {
@@ -78,7 +83,7 @@ func GetVersions(path string) {
 	appVersion := GetApplication().Results[0].Version
 	buildVersion := GetBuildVersion()
 	assetsVersion := GetAssets().AssetsVersion
-	config := GetConfig()
+	config := GetConfig(buildVersion, path)
 	assetsUrl := config.AssetsURL
 	dataUrl := config.DataURL
 	//Display results
@@ -99,20 +104,21 @@ func GetVersions(path string) {
 		log.Println(err)
 	}
 	//Save results
-	err = SaveData(buildVersion, path, client)
+	err = SaveData(buildVersion, path, client, "versions")
 	if err != nil {
 		log.Println(err)
 	}
 }
 
+//https://ankama.akamaized.net/games/dofus-tablette/assets/2.22.1
 //Save results as "version.json"
-func SaveData(buildVersion string, path string, client []byte) error {
-	mainFolder := "/dataMap-v" + buildVersion
+func SaveData(buildVersion, path string, client []byte, fileName string) error {
+	mainFolder := "/" + buildVersion + "/data"
 	path = path + mainFolder
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		err = os.Mkdir(path, os.ModePerm)
+		err = os.MkdirAll(path, os.ModePerm)
 	}
-	file, err := os.Create(path + "/version.json")
+	file, err := os.Create(path + "/" + fileName + ".json")
 	if err != nil {
 		return err
 	}
