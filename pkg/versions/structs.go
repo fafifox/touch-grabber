@@ -2,6 +2,14 @@ package versions
 
 import "time"
 
+type Client struct {
+	AppVersion    string `json:"appVersion"`
+	BuildVersion  string `json:"buildVersion"`
+	AssetsVersion string `json:"assetsVersion"`
+	AssetsURL     string `json:"assetsUrl"`
+	DataURL       string `json:"dataUrl"`
+}
+
 type Assets struct {
 	AssetsVersion     string   `json:"assetsVersion"`
 	StaticDataVersion string   `json:"staticDataVersion"`
