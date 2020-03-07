@@ -1,3 +1,4 @@
 # not implemented yet
 TOUCH_PROXY_URL: "https://proxyconnection.touch.dofus.com"
 BUILD_VERSION: "1.45.4"
+SAVE_PATH: "./"

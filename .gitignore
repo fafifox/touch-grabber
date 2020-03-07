@@ -1,6 +1,8 @@
 *.exe
 *.exe~
 output/
+builds/
+dataMap-v*/
 /.idea
 *.iml
 *.ipr
