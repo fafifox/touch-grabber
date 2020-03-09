@@ -16,26 +16,30 @@ type dataMapDictionary struct {
 
 func FetchAllDataDictionary(dataUrl string, buildVersion string, path string) {
 	for _, lang := range langs {
-		FetchDataDictionary(dataUrl, lang, buildVersion, path)
+		err := FetchDataDictionary(dataUrl, lang, buildVersion, path)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
 
-func FetchDataDictionary(dataUrl string, langage string, buildVersion string, path string) {
+func FetchDataDictionary(dataUrl string, langage string, buildVersion string, path string) error {
 	url := dataUrl + "/data/dictionary?lang=" + langage + "&v=" + buildVersion
 	requestBody, err := json.Marshal(map[string]string{
 		"lang": langage,
 	})
 	if err != nil {
-		log.Println(err)
+		return err
 	}
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
-		log.Println(err)
+		return err
 	}
 	defer resp.Body.Close()
+	log.Printf("[%d] %s\n", resp.StatusCode, resp.Request.URL)
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Println(err)
+		return err
 	}
 	dataMapDictionary := dataMapDictionary{
 		Data: body,
@@ -43,9 +47,9 @@ func FetchDataDictionary(dataUrl string, langage string, buildVersion string, pa
 	}
 	err = SaveDataDictionary(&dataMapDictionary, buildVersion, path, langage)
 	if err != nil {
-		log.Println(err)
+		return err
 	}
-	log.Println("Saved: ", dataMapDictionary.Name)
+	return nil
 }
 
 func SaveDataDictionary(data *dataMapDictionary, buildVersion string, path string, lang string) error {

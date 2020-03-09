@@ -38,6 +38,7 @@ func FetchDataMap(dataUrl string, langage string, buildVersion string, path stri
 		return err
 	}
 	defer resp.Body.Close()
+	log.Printf("[%d] %s Class: %s\n", resp.StatusCode, resp.Request.URL, typeName)
 	if resp.StatusCode == 200 {
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
@@ -51,7 +52,6 @@ func FetchDataMap(dataUrl string, langage string, buildVersion string, path stri
 		if err != nil {
 			return err
 		}
-		log.Println("Saved: ", dataMapData.Name)
 		return nil
 	}
 	return nil

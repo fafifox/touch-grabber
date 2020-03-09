@@ -16,5 +16,6 @@ func GetRequestBody(url string) []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Printf("[%d] %s\n", res.StatusCode, res.Request.URL)
 	return body
 }

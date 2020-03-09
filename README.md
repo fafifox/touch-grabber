@@ -5,7 +5,7 @@ Allows to find the different versions, to download the files containing the data
 Will grab:
 - https://proxyconnection.touch.dofus.com/data/map (Game data files)
 - https://proxyconnection.touch.dofus.com/data/dictionary (GUI text data)
-- https://proxyconnection.touch.dofus.com/config.json ()
+- https://proxyconnection.touch.dofus.com/config.json
 - Application Version
 - Build Version
 - Assets Version
