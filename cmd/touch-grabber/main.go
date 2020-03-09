@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/farooch/touch-grabber/configs"
+	"github.com/farooch/touch-grabber/pkg/data"
+	"github.com/farooch/touch-grabber/pkg/versions"
 	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"os"
-	"touch-grabber/configs"
-	"touch-grabber/pkg/data"
-	"touch-grabber/pkg/versions"
 )
 
 func main() {

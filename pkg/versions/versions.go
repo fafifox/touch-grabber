@@ -2,11 +2,11 @@ package versions
 
 import (
 	"encoding/json"
+	"github.com/farooch/touch-grabber/pkg/httputils"
 	"log"
 	"os"
 	"regexp"
 	"time"
-	"touch-grabber/pkg/httputils"
 )
 
 const (
