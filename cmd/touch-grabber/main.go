@@ -8,6 +8,7 @@ import (
 	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"os"
+	"sync"
 )
 
 func main() {
@@ -33,6 +34,19 @@ func main() {
 		}
 	}
 	versions.GetVersions(cfg.SavePath)
-	data.FetchAllDataMap(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
-	data.FetchAllDataDictionary(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
+	var wg sync.WaitGroup
+	wg.Add(3)
+	go func() {
+		data.FetchAllDataDictionary(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
+		wg.Done()
+	}()
+	go func() {
+		data.FetchAllDataMap(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
+		wg.Done()
+	}()
+	go func() {
+		data.FetchAssetMap(cfg.DataUrl, cfg.TargetBuildVersion, cfg.SavePath)
+		wg.Done()
+	}()
+	wg.Wait()
 }
