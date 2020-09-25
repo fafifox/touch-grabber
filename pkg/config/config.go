@@ -1,4 +1,4 @@
-package configs
+package config
 
 type Config struct {
 	DataUrl            string `yaml:"DATA_URL"`
