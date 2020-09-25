@@ -1,7 +1,5 @@
 # TOUCH-GRABBER
 
-##### Dofus Touch data 
-
 This tool downloads the files and data of the Dofus Touch game.
 
 >
