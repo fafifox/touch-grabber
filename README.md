@@ -1,16 +1,22 @@
 # TOUCH-GRABBER
 
-Allows to find the different versions, to download the files containing the data of the game
+##### Dofus Touch data 
 
-Will grab:
-- https://proxyconnection.touch.dofus.com/data/map (Game data files)
-- https://proxyconnection.touch.dofus.com/data/dictionary (GUI text data)
-- https://proxyconnection.touch.dofus.com/config.json
-- Application Version
-- Build Version
-- Assets Version
-- Assets URL
-- Data URL
+This tool downloads the files and data of the Dofus Touch game.
+
+>
+    - https://proxyconnection.touch.dofus.com/data/map (Game data)
+    - https://proxyconnection.touch.dofus.com/data/dictionary (GUI text data)
+    - https://proxyconnection.touch.dofus.com/config.json
+    - Application Version
+    - Build Version
+    - Assets Version
+    - Assets URL
+    - Data URL
+
+#### Ouput
+
+https://github.com/fafifox/touch-datas
 
 #### Usage
 
